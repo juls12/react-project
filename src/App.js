@@ -4,8 +4,7 @@ import MyNav from './MyNav';
 import Courses from './Courses';
 import AddCourse from './AddCourse';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
-
+import Banner from "./Banner";
 
 function App() {
   return (
@@ -24,7 +23,7 @@ function App() {
 
 const Home = () => (
   <div>
-    <h1>Home Page</h1>
+    <Banner />
   </div>
 );
 
