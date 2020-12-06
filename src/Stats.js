@@ -13,7 +13,6 @@ export default class Stats extends React.Component {
     componentDidMount() {
         axios.get(`http://localhost:3001/stats`)
             .then(res => {
-                console.log(res.data);
                 this.setState({ stats: res.data });
             });
     }
@@ -22,7 +21,7 @@ export default class Stats extends React.Component {
         return (
             <Row className="stats-row">
                 {this.state.stats.map(stat => 
-                    <Col sm="3" >
+                    <Col sm="3" key={stat.id}>
                         <Card body className="stats-body" > 
                         <CardText  className="stats-txt">{stat.title}  <Badge color="dark" pill> {stat.amount} </Badge></CardText>
                         </Card>

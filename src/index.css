@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -53,4 +54,8 @@ text-align: right;
 }
 .stats-txt {
   text-transform: uppercase;
+}
+
+.tablestatsstyle {
+  padding: 40px;
 }

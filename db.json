@@ -89,8 +89,46 @@
       "open": true,
       "instructors": ["01"],
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+    },
+    
+    {
+      "id": "05",
+      "title": "Java",
+      "imagePath": "/java.png",
+      "price": {
+        "normal": 1100,
+        "early_bird": 800
+      },
+      "dates": {
+        "start_date": "2019-09-27",
+        "end_date": "2019-09-28"
+      },
+      "duration": "2 days",
+      "open": false,
+      "instructors": ["01"],
+      "description": "<p>Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"
+    },
+
+    {
+      "id": "06",
+      "title": "Python",
+      "imagePath": "/python.jpg",
+      "price": {
+        "normal": 1100,
+        "early_bird": 800
+      },
+      "dates": {
+        "start_date": "2019-09-27",
+        "end_date": "2019-09-28"
+      },
+      "duration": "2 days",
+      "open": false,
+      "instructors": ["01"],
+      "description": "<p>Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant whitespace.</p>"
     }
+
   ],
+
   "instructors": [
     {
       "id": "01",
