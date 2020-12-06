@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+
 .navbar-nav {
   margin-left: auto;
   margin-right: 0 !important;
@@ -41,4 +42,15 @@ text-align: right;
 
 .jumbo-style {
   margin: 40px;
+}
+
+.stats-row {
+  padding: 40px;
+}
+
+.stats-body {
+  margin-bottom: 20px;
+}
+.stats-txt {
+  text-transform: uppercase;
 }

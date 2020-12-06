@@ -5,6 +5,7 @@ import Courses from './Courses';
 import AddCourse from './AddCourse';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Banner from "./Banner";
+import Stats from './Stats';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 const Home = () => (
   <div>
     <Banner />
+    <Stats/>
   </div>
 );
 
