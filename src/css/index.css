@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-
+/* Home Page style*/ 
 .navbar-nav {
   margin-left: auto;
   margin-right: 0 !important;
@@ -55,6 +55,3 @@ text-align: right;
 .stats-txt {
   text-transform: uppercase;
 }
-
-
-

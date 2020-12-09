@@ -60,7 +60,7 @@ export default class TableStats extends React.Component {
                                         {tablestat.title} </UncontrolledTooltip></th>
                                 <td>{tablestat.title}</td>
                                 <td style={{ textAlign: "center" }}>{
-                                    tablestat.open ? <BsCheck /> : <p> <BsX /></p>
+                                    tablestat.open ? <BsCheck /> : <p> <BsX /> </p>
                                 }</td>
                                 <td>{tablestat.price.normal}</td>
                                 <td>{convertDate(tablestat.dates.start_date)} - {convertDate(tablestat.dates.end_date)}</td>
@@ -68,7 +68,7 @@ export default class TableStats extends React.Component {
                             </tr>
                         )}
                         <tr>
-                            <td colSpan="6" style={{ backgroundColor: "lightgray", textAlign: "right" }} > <Link className="btn btn-primary" role="button" to="/courses">View All</Link></td>
+                            <td colSpan="6" style={{ backgroundColor: "lightgray", textAlign: "right" }} > <Button color="primary" tag={Link} to="/courses">View all</Button></td>
                         </tr>
                     </tbody>
                 </Table>

@@ -1,13 +1,13 @@
 import React from 'react';
-import './index.css';
-import MyNav from './MyNav';
-import Courses from './Courses';
-import Course from './Course'
-import AddCourse from './AddCourse';
+import './css/index.css';
+import MyNav from './Components/MyNav';
+import Courses from './Components/Courses';
+import Course from './Components/Course'
+import AddCourse from './Components/AddCourse';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Banner from "./Banner";
-import Stats from './Stats';
-import TableStats from './TableStats';
+import Banner from "./Components/Banner";
+import Stats from './Components/Stats';
+import TableStats from './Components/TableStats';
 
 function App() {
   return (
