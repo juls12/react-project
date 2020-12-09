@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from "react-dom";
 import "./Box.css"
 import { Card } from "react-bootstrap";
@@ -10,49 +10,48 @@ import { Badge } from 'reactstrap';
 //   CardTitle, CardSubtitle
 // } from 'reactstrap';
 
+const Courses = () => {
+    const [courses, setCourses] = useState([]);
 
-    
+    useEffect(() => {
+        fetch ("http://localhost:3001/courses")
+        .then((res) => res.json())
+        .then((data) => {
+            setCourses(data);
+        });
+    }, []);
 
-
-
-const Courses = (props) => {
-  const cardInfo = [
-    {image: "scrum.png", title: "ghh", price:"hghghhjhhgjhjhg", bookable:"yes", duration:"2 days", dates:"27/9/2020 - 29/9/2020"},
-    {image: "react.png", title: "gtt", price:"jtyytyytyt", bookable:"yes", duration:"2 days", dates:"27/9/2020 - 29/9/2020"},
-    {image: "angular.png", title: "fgh", price:"nbbbnnbnbnbnb", bookable:"yes", duration:"2 days", dates:"27/9/2020 - 29/9/2020"},
-    {image: "ui-ux.png", title: "fde", price:"gfgfthtthgfgf", bookable:"yes", duration:"2 days", dates:"27/9/2020 - 29/9/2020"},
-    {image: "scrum.png", title: "ghh", price:"hghghhjhhgjhjhg", bookable:"yes", duration:"2 days", dates:"27/9/2020 - 29/9/2020"},
-    
-  ];
-
-  const renderCard = (card, index) => {
-    
-   
     return (
-     
-      
-      <Card style={{ width: '18rem' }} key={index} className="box">
-        <Card.Title>{card.title}</Card.Title>
-      <Card.Img variant="top" src="holder.js/100px180" src={card.image} />
-      <Card.Body>
+        <div>
+            <h1>All Courses </h1>
+            <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+               
+                        
+                {courses.length &&
+                courses.map(({ id, title, imagePath, price, open, duration, dates}) => (
+                    <Card style={{ width: '20rem' }} key={id} className="box">
+                    <Card.Title>{title}</Card.Title>
+                    <Card.Img variant="top" src={imagePath} />
+                    <Card.Body>
         
-        <Card.Text>
-          <div style={{fontWeight: "bold"}}>Price:  {card.price} </div>
-          <div style={{fontWeight: "bold"}}>Bookable: {card.bookable} </div>
-          <div style={{fontWeight: "bold"}}>Duration: {card.duration} </div>
-          <div style={{fontWeight: "bold"}}>Dates: {card.dates} </div>
-        </Card.Text>
-        <Button style={{float: 'right'}} color="primary" variant="primary">View</Button>
-      </Card.Body>
-    </Card>
-    
+                    <Card.Text>
+                        <p style={{fontWeight: "bold"}}>Price:  {price.normal} / Bookable: {open}  </p>
+                        <div style={{fontWeight: "bold"}}>Duration: {duration} </div>
+                        <div style={{fontWeight: "bold"}}>Dates: {dates.start_date} - {dates.end_date} </div>
+                    </Card.Text>
+                        <Button style={{float: 'right'}} color="primary" key={id} variant="primary">View</Button>
+                        
+                    </Card.Body>
+                    </Card>
+                ))}
+               
+               
+            </div>
+            </div>
+        </div>
+    );
 
-    )
-  }
-  return <div className="grid"> {
-    
-    cardInfo.map(renderCard)
-  }</div>
 };
 
 export default Courses;
