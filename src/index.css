@@ -5,9 +5,56 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 0 !important;
+  }
+
+.nav-style a {
+  color: white;
+  padding: 10px;
+}
+
+.nav-style a:visited {
+  color: white;
+}
+
+.nav-style a:hover {
+  color: #f15b40;
+}
+
+.navbar a {
+color: white;
+text-align: right;
+}
+
+.navbar a:hover {
+  color: #f15b40;
+  }
+
+.jumbo-style {
+  margin: 40px;
+}
+
+.stats-row {
+  padding: 40px;
+}
+
+.stats-body {
+  margin-bottom: 20px;
+}
+.stats-txt {
+  text-transform: uppercase;
+}
+
+
+
