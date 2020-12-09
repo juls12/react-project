@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Row, Col, CardText, Badge } from 'reactstrap';
+import { Card, Row, Col, CardText, Badge, Container } from 'reactstrap';
 
 export default class Stats extends React.Component {
     state = {
@@ -19,6 +19,7 @@ export default class Stats extends React.Component {
 
     render() {
         return (
+            <Container fluid>
             <Row className="stats-row">
                 {this.state.stats.map(stat => 
                     <Col sm="3" key={stat.id}>
@@ -28,6 +29,7 @@ export default class Stats extends React.Component {
                     </Col>
                 )}
             </Row>
+            </Container>
         );
     }
 }

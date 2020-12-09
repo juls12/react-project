@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import MyNav from './MyNav';
 import Courses from './Courses';
+import Course from './Course'
 import AddCourse from './AddCourse';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Banner from "./Banner";
@@ -16,6 +17,7 @@ function App() {
      <Switch>
      <Route path="/" exact component={Home}/>
      <Route path="/courses" component={Courses} />
+     <Route path="/course/:id" component={Course} />
      <Route path="/addcourse" component={AddCourse} />
      </Switch>
     </div>
