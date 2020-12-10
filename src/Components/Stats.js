@@ -20,15 +20,17 @@ export default class Stats extends React.Component {
     render() {
         return (
             <Container fluid>
-            <Row className="stats-row">
-                {this.state.stats.map(stat => 
-                    <Col sm="3" key={stat.id}>
-                        <Card body className="stats-body" > 
-                        <CardText  className="stats-txt">{stat.title}  <Badge color="dark" pill> {stat.amount} </Badge></CardText>
-                        </Card>
-                    </Col>
-                )}
-            </Row>
+                <Col md="12">
+                    <Row className="stats-row">
+                        {this.state.stats.map(stat =>
+                            <Col key={stat.id}>
+                                <Card body className="stats-body" >
+                                    <CardText className="stats-txt">{stat.title}  <Badge color="dark" pill> {stat.amount} </Badge></CardText>
+                                </Card>
+                            </Col>
+                        )}
+                    </Row>
+                </Col>
             </Container>
         );
     }

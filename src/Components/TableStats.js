@@ -11,7 +11,6 @@ export default class TableStats extends React.Component {
 
     };
 
-
     // Server runs on port 3001
 
     componentDidMount() {
@@ -28,15 +27,15 @@ export default class TableStats extends React.Component {
             return dateString.split("-").reverse().join("-");
         }
         // Generate unique id for every tooltip    
-        const generateTooltipId = function(id) {
+        const generateTooltipId = function (id) {
             return "tooltipId_" + id;
         }
 
-        const generateCourseLink = function(id){
+        const generateCourseLink = function (id) {
             return `course/${id}`
         }
 
-//Table reponsives makes it horizontally scrollable on small screen devices
+        //Table reponsives makes it horizontally scrollable on small screen devices
         return (
             <Container fluid>
                 <Table responsive >
