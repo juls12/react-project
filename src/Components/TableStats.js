@@ -32,6 +32,10 @@ export default class TableStats extends React.Component {
             return "tooltipId_" + id;
         }
 
+        const generateCourseLink = function(id){
+            return `course/${id}`
+        }
+
 
         return (
             <Container fluid>
@@ -57,14 +61,14 @@ export default class TableStats extends React.Component {
                                 <th scope="row">
                                     <p id={generateTooltipId(tablestat.id)}> <BsExclamationCircle /></p>
                                     <UncontrolledTooltip placement="right" target={generateTooltipId(tablestat.id)}>
-                                        {tablestat.title} </UncontrolledTooltip></th>
+                                        {tablestat.duration} </UncontrolledTooltip></th>
                                 <td>{tablestat.title}</td>
                                 <td style={{ textAlign: "center" }}>{
                                     tablestat.open ? <BsCheck /> : <p> <BsX /> </p>
                                 }</td>
                                 <td>{tablestat.price.normal}</td>
                                 <td>{convertDate(tablestat.dates.start_date)} - {convertDate(tablestat.dates.end_date)}</td>
-                                <td><Button color="info">View Details</Button></td>
+                                <td><Button color="info" tag={Link} to={generateCourseLink(tablestat.id)}>View Details</Button></td>
                             </tr>
                         )}
                         <tr>
