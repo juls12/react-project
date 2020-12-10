@@ -27,7 +27,7 @@ export default class TableStats extends React.Component {
         const convertDate = function (dateString) {
             return dateString.split("-").reverse().join("-");
         }
-
+        // Generate unique id for every tooltip    
         const generateTooltipId = function(id) {
             return "tooltipId_" + id;
         }
@@ -36,13 +36,11 @@ export default class TableStats extends React.Component {
             return `course/${id}`
         }
 
-
+//Table reponsives makes it horizontally scrollable on small screen devices
         return (
             <Container fluid>
-
                 <Table responsive >
                     <thead>
-
                         <tr>
                             <td colSpan="6" style={{ backgroundColor: "lightgray" }}>Last {this.state.tablestats.slice(-5).length} Courses</td>
                         </tr>
