@@ -28,7 +28,7 @@ const Courses = () => {
                 <Container fluid>
                     <Col xs="12">
                         <Row>
-                            {courses.length && courses.map(({ id, title, imagePath, price, duration, dates }) => (
+                            {courses.slice(-5).map(({ id, title, imagePath, price, duration, dates }) => (
                                 <Card style={{ width: '20rem' }} key={id} className="box">
                                     <Card.Title>{title}</Card.Title>
                                     <Card.Img variant="top" src={imagePath} />
