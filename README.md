@@ -1,3 +1,14 @@
+# Instruction to run the project 
+
+To install the packages
+### `npm i`
+
+To run the app 
+### `npm start`
+
+To run the script that runs the json server
+### `npm run server`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

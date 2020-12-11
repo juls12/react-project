@@ -41,7 +41,7 @@ export default class TableStats extends React.Component {
                 <Table responsive >
                     <thead>
                         <tr>
-                            <td colSpan="6" style={{ backgroundColor: "lightgray" }}>Last {this.state.tablestats.slice(-5).length} Courses</td>
+                            <td colSpan="6" style={{ backgroundColor: "#e9ecef" }}>Last {this.state.tablestats.slice(-5).length} Courses</td>
                         </tr>
                         <tr>
                             <th></th>
@@ -63,13 +63,13 @@ export default class TableStats extends React.Component {
                                 <td style={{ textAlign: "center" }}>{
                                     tablestat.open ? <BsCheck /> : <p> <BsX /> </p>
                                 }</td>
-                                <td>{tablestat.price.normal}</td>
+                                <td>{tablestat.price.normal}‎ €</td>
                                 <td>{convertDate(tablestat.dates.start_date)} - {convertDate(tablestat.dates.end_date)}</td>
                                 <td><Button color="info" tag={Link} to={generateCourseLink(tablestat.id)}>View Details</Button></td>
                             </tr>
                         )}
                         <tr>
-                            <td colSpan="6" style={{ backgroundColor: "lightgray", textAlign: "right" }} > <Button color="primary" tag={Link} to="/courses">View all</Button></td>
+                            <td colSpan="6" style={{ backgroundColor: "#e9ecef", textAlign: "right" }} > <Button color="primary" tag={Link} to="/courses">View all</Button></td>
                         </tr>
                     </tbody>
                 </Table>
