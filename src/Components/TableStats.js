@@ -19,8 +19,6 @@ export default class TableStats extends React.Component {
                 this.setState({ tablestats: res.data });
             });
     }
-
-
     render() {
 
         const convertDate = function (dateString) {
@@ -74,7 +72,6 @@ export default class TableStats extends React.Component {
                     </tbody>
                 </Table>
             </Container>
-
         );
     }
 }

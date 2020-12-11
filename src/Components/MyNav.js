@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem,
 } from 'reactstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const MyNav = (props) => {
@@ -18,7 +18,7 @@ const MyNav = (props) => {
   return (
     <div>
       <Navbar color="dark" light expand="md">
-      <Link to ="/">Code.Hub Dashboard</Link>
+        <Link to="/">Code.Hub Dashboard</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="nav-style" navbar>

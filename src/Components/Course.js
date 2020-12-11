@@ -18,7 +18,7 @@ export default class Course extends React.Component {
                 console.log(res.data);
                 this.setState({ course: res.data });
             })
-            .then( () => {
+            .then(() => {
                 axios.get(`http://localhost:3001/courses/${params.id}/instructors/`)
                     .then(res => {
                         console.log(res.data);
@@ -30,7 +30,7 @@ export default class Course extends React.Component {
     render() {
         return (
             <Container fluid>
-             <h1>{this.state.course.title}</h1>
+                <h1>{this.state.course.title}</h1>
             </Container>
         );
     }

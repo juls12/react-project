@@ -16,7 +16,6 @@ export default class Stats extends React.Component {
                 this.setState({ stats: res.data });
             });
     }
-
     render() {
         return (
             <Container fluid>
