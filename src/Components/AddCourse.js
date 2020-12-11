@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/index.css';
-import { Col, Button, Form, FormGroup, Label, Input, FormText, Container } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 
 const AddCourse = (props) => {
   return (
