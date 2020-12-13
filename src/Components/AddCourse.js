@@ -1,87 +1,110 @@
 import React from "react";
 import '../css/index.css';
 import { Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { Component } from "react";
+import axios from 'axios';
 
-const AddCourse = (props) => {
-  return (
-    <Container fluid>
-      <h3 style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
-      <Form>
-        <FormGroup row>
-          <Label sm={2}>Title</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Title" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>Duration</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Duration" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>Image Path</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Image Path" />
-          </Col>
-        </FormGroup>
-        <FormGroup check>
-          <Input type="checkbox" name="check" id="exampleCheck" />
-          <Label for="exampleCheck" check>Bookable</Label>
-        </FormGroup>
-        <br></br>
-        <h5 style={{ marginBottom: '20px', marginTop: '20px' }}>Instructors</h5>
-        <FormGroup check>
-          <Col>
+class AddCourse extends Component {
+  state = {
+    instructors: [],
+    newCourse: {
+      title: '',
+      duration: '',
+      imagePath: '',
+      open: false,
+      instructors: [],
+      description: '',
+      date: {
+        start_date: '',
+        end_date: ''
+      },
+      price: {
+        normal: null,
+        early_bird: null
+      }
+    }
+  };
+
+  componentDidMount() {
+    axios.get(`http://localhost:3001/instructors/`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ instructors: res.data });
+      })
+  }
+
+  render() {
+    const newCourse = this.state.newCourse;
+    return (
+      <Container fluid>
+        <h3 style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
+        <Form>
+          {
+            [
+              { label: 'Title', field: 'title', state: newCourse.title, type: 'text', placeholder: 'Enter Title' },
+              { label: 'Duration', field: 'duration', state: newCourse.duration, type: 'text', placeholder: 'Enter Duration' },
+              { label: 'Image Path', field: 'imagePath', state: newCourse.imagePath, type: 'text', placeholder: '/imagepath.jpg' },
+
+            ].map(({ label, field, state, type, placeholder }) => (
+              <FormGroup row key={field}>
+                <Label for={field} sm={2}>{label}</Label>
+                <Col sm={10}>
+                  <Input readOnly type={type} id={field} value={state} placeholder={placeholder} />
+                </Col>
+              </FormGroup>
+            ))
+          }
+
+          <FormGroup check>
             <Input type="checkbox" name="check" id="exampleCheck" />
-            <Label for="exampleCheck" check>John Tsevdos</Label>
-          </Col>
-          <Col>
-            <Input type="checkbox" name="check" id="exampleCheck" />
-            <Label for="exampleCheck" check>Yannis Nikolakopoulos</Label>
-          </Col>
-        </FormGroup>
-        <br></br>
-        <FormGroup row>
-          <Label for="exampleText" sm={2}>Course Discription</Label>
-          <Col sm={10}>
-            <Input type="textarea" name="text" id="exampleText" />
-          </Col>
-        </FormGroup>
-        <h5>Dates</h5>
-        <FormGroup row>
-          <Label sm={2}>Start Date</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Date" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>End Date</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Date" />
-          </Col>
-        </FormGroup>
-        <h5>Price</h5>
-        <FormGroup row>
-          <Label sm={2}>Early Bird</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Price" />
-          </Col>
-        </FormGroup>
-        <FormGroup row>
-          <Label sm={2}>Normal Price</Label>
-          <Col sm={10}>
-            <Input placeholder="Enter Price" />
-          </Col>
-        </FormGroup>
-        <FormGroup row style={{ textAlign: "right" }}>
-        <Col sm={{ size: 10, offset: 2 }}>
-          <Button color="primary">Submit</Button>
-        </Col>
-      </FormGroup>
-      </Form>
-    </Container>
-  );
+            <Label for="exampleCheck" check>Bookable</Label>
+          </FormGroup>
+
+          <br></br>
+
+
+          <h5 style={{ marginBottom: '20px', marginTop: '20px' }}>Instructors</h5>
+          <FormGroup check>
+            {
+              this.state.instructors.map(instructor => (
+                <Col key={instructor.id}>
+                  <Input type="checkbox" name="check" />
+                  <Label check>{instructor.name.first} {instructor.name.last}</Label>
+                </Col>
+              ))
+            }
+          </FormGroup>
+
+          <br></br>
+          {
+            [
+              { heading: null, label: 'Course Discription', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Discription' },
+              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.date.start_date, type: 'text', placeholder: 'dd-mm-yyyy' },
+              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.date.end_date, type: 'text', placeholder: 'dd-mm-yyyy' },
+              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.early_bird, type: 'number', placeholder: '0' },
+              { heading: null, label: 'Normal', field: 'normal', state: newCourse.normal, type: 'number', placeholder: 'Enter Normal price' }
+
+            ].map(({ heading, label, field, state, type, placeholder }) => (
+              <React.Fragment key={field}>
+                <h5>{heading}</h5>
+                <FormGroup row >
+                  <Label for={field} sm={2}>{label}</Label>
+                  <Col sm={10}>
+                    <Input readOnly type={type} id={field} value={state} placeholder={placeholder} />
+                  </Col>
+                </FormGroup>
+              </React.Fragment>
+            ))
+          }
+          <FormGroup row style={{ textAlign: "right" }}>
+            <Col sm={{ size: 10, offset: 2 }}>
+              <Button color="primary">Submit</Button>
+            </Col>
+          </FormGroup>
+        </Form>
+      </Container>
+    );
+  }
 }
 
 export default AddCourse;
