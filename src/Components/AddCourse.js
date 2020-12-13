@@ -34,7 +34,7 @@ class AddCourse extends Component {
   }
 
   onInputChange = ({ target }) => {
-    const { id, value } = target;
+    const { id, value, checked } = target;
     let { newCourse } = this.state;
 
     if (id === 'start_date' || id === 'end_date') {
@@ -46,6 +46,26 @@ class AddCourse extends Component {
       console.log('changeprice')
       newCourse.price[id] = value;
       this.setState({ newCourse });
+
+    } else if (id === 'open') {
+      console.log(id, checked);
+
+      newCourse[id] = checked;
+      this.setState({ newCourse });
+
+    } else if (id === 'instructor') {
+      const instructorId = target.name;
+      console.log(id, checked, instructorId);
+
+      // Checking if instuctor id is already in the array
+      const index = this.state.newCourse.instructors.indexOf(instructorId);
+      if (checked === false && index > -1) {
+        this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
+      } else {
+        this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
+      }
+
+      console.log( this.state.newCourse.instructors)
 
     } else {
       console.log(id, value);
@@ -63,6 +83,8 @@ class AddCourse extends Component {
         console.log(error);
       });
   }
+
+
 
   render() {
     const newCourse = this.state.newCourse;
@@ -87,8 +109,8 @@ class AddCourse extends Component {
           }
 
           <FormGroup check>
-            <Input type="checkbox" name="check" id="exampleCheck" />
-            <Label for="exampleCheck" check>Bookable</Label>
+            <Input type="checkbox" id="open" onChange={this.onInputChange} />
+            <Label for="open" check>Bookable</Label>
           </FormGroup>
 
           <br></br>
@@ -99,7 +121,7 @@ class AddCourse extends Component {
             {
               this.state.instructors.map(instructor => (
                 <Col key={instructor.id}>
-                  <Input type="checkbox" name="check" />
+                  <Input type="checkbox" name={instructor.id} id="instructor" onChange={this.onInputChange}/>
                   <Label check>{instructor.name.first} {instructor.name.last}</Label>
                 </Col>
               ))
