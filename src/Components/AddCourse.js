@@ -39,14 +39,14 @@ class AddCourse extends Component {
 
     if (id === 'start_date' || id === 'end_date') {
       console.log('changedate')
-        newCourse.date[id] = value;
-        this.setState({ newCourse });
+      newCourse.date[id] = value;
+      this.setState({ newCourse });
 
     } else if (id === 'normal' || id === 'early_bird') {
-        console.log('changeprice')
-        newCourse.price[id] = value;
-        this.setState({ newCourse });
-  
+      console.log('changeprice')
+      newCourse.price[id] = value;
+      this.setState({ newCourse });
+
     } else {
       console.log(id, value);
       newCourse[id] = value;
@@ -54,6 +54,15 @@ class AddCourse extends Component {
     }
   };
 
+  sumbitForm = function () {
+    axios.post(`http://localhost:3001/courses`, this.state.newCourse)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   render() {
     const newCourse = this.state.newCourse;
@@ -120,7 +129,7 @@ class AddCourse extends Component {
           }
           <FormGroup row style={{ textAlign: "right" }}>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button color="primary">Submit</Button>
+              <Button color="primary" onClick={() => this.sumbitForm()}>Submit</Button>
             </Col>
           </FormGroup>
         </Form>
