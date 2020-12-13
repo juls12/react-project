@@ -14,7 +14,7 @@ class AddCourse extends Component {
       open: false,
       instructors: [],
       description: '',
-      date: {
+      dates: {
         start_date: '',
         end_date: ''
       },
@@ -38,24 +38,22 @@ class AddCourse extends Component {
     let { newCourse } = this.state;
 
     if (id === 'start_date' || id === 'end_date') {
-      console.log('changedate')
-      newCourse.date[id] = value;
+      newCourse.dates[id] = value;
       this.setState({ newCourse });
 
     } else if (id === 'normal' || id === 'early_bird') {
-      console.log('changeprice')
       newCourse.price[id] = value;
       this.setState({ newCourse });
 
     } else if (id === 'open') {
-      console.log(id, checked);
+      // console.log(id, checked);
 
       newCourse[id] = checked;
       this.setState({ newCourse });
 
     } else if (id === 'instructor') {
       const instructorId = target.name;
-      console.log(id, checked, instructorId);
+      // console.log(id, checked, instructorId);
 
       // Checking if instuctor id is already in the array
       const index = this.state.newCourse.instructors.indexOf(instructorId);
@@ -65,10 +63,10 @@ class AddCourse extends Component {
         this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
       }
 
-      console.log( this.state.newCourse.instructors)
+      // console.log( this.state.newCourse.instructors)
 
     } else {
-      console.log(id, value);
+      // console.log(id, value);
       newCourse[id] = value;
       this.setState({ newCourse });
     }
@@ -132,8 +130,8 @@ class AddCourse extends Component {
           {
             [
               { heading: null, label: 'Course Discription', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Discription' },
-              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.date.start_date, type: 'text', placeholder: 'dd-mm-yyyy' },
-              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.date.end_date, type: 'text', placeholder: 'dd-mm-yyyy' },
+              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'text', placeholder: 'dd-mm-yyyy' },
+              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'text', placeholder: 'dd-mm-yyyy' },
               { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.early_bird, type: 'number', placeholder: '0' },
               { heading: null, label: 'Normal', field: 'normal', state: newCourse.normal, type: 'number', placeholder: 'Enter Normal price' }
 
