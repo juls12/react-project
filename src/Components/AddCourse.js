@@ -33,6 +33,28 @@ class AddCourse extends Component {
       })
   }
 
+  onInputChange = ({ target }) => {
+    const { id, value } = target;
+    let { newCourse } = this.state;
+
+    if (id === 'start_date' || id === 'end_date') {
+      console.log('changedate')
+        newCourse.date[id] = value;
+        this.setState({ newCourse });
+
+    } else if (id === 'normal' || id === 'early_bird') {
+        console.log('changeprice')
+        newCourse.price[id] = value;
+        this.setState({ newCourse });
+  
+    } else {
+      console.log(id, value);
+      newCourse[id] = value;
+      this.setState({ newCourse });
+    }
+  };
+
+
   render() {
     const newCourse = this.state.newCourse;
     return (
@@ -49,7 +71,7 @@ class AddCourse extends Component {
               <FormGroup row key={field}>
                 <Label for={field} sm={2}>{label}</Label>
                 <Col sm={10}>
-                  <Input readOnly type={type} id={field} value={state} placeholder={placeholder} />
+                  <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} />
                 </Col>
               </FormGroup>
             ))
@@ -90,7 +112,7 @@ class AddCourse extends Component {
                 <FormGroup row >
                   <Label for={field} sm={2}>{label}</Label>
                   <Col sm={10}>
-                    <Input readOnly type={type} id={field} value={state} placeholder={placeholder} />
+                    <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} />
                   </Col>
                 </FormGroup>
               </React.Fragment>
