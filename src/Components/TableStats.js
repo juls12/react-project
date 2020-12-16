@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 export default class TableStats extends React.Component {
     state = {
         tablestats: [],
+       
 
     };
 
     // Server runs on port 3001
 
     componentDidMount() {
+        
         axios.get(`http://localhost:3001/courses`)
             .then(res => {
                 this.setState({ tablestats: res.data });
