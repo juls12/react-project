@@ -11,6 +11,9 @@ import { Card } from "react-bootstrap";
 
 
 
+
+
+
 export default class Course extends React.Component {
     state = {
         course: {},
@@ -66,40 +69,28 @@ export default class Course extends React.Component {
 
              <p style={{ fontWeight: "bold" }}> Duration: {this.state.course.duration}</p>
              <p style={{ fontWeight: "bold" }}> Dates: {convertDate(this.state.course.dates?this.state.course.dates.start_date:"")} - {convertDate(this.state.course.dates?this.state.course.dates.end_date:"")} </p>
-             <div style={{ fontWeight: "bold" }}> { this.state.course.description } </div>
+             <div style={{ fontWeight: "bold" }} dangerouslySetInnerHTML={{ __html: this.state.course.description }}></div>
              
-            <div>
-                
-            </div>
+            
              <button className="btn btn-primary m-1" > Edit</button>
              <button className="btn btn-danger m-1"> Delete</button>
             
             
              
              <h1>Instructors</h1>
-             {this.state.instructors.map(({ gender, name, email, dob, bio, linkedin, hobbies }) => (
-                 <Card>
+             {this.state.instructors.map(({id, gender, name, email, dob, bio, linkedin, hobbies }) => (
+                 <Card key={id}>
                  <Card.Title></Card.Title>
                  <Card.Body>
                      <Card.Text>
-                         <span style={{ fontWeight: "bold" }}> {name.first} {name.last} ({dob})</span>
-                         <span style={{ fontWeight: "bold" }}>  <p><a href="#">{email}</a> | <a href="https://www.linkedin.com/sample"> LinkedIn</a> </p> </span>
-                         <span style={{ fontWeight: "bold" }}> <p>{bio}</p> </span>
+                         <span style={{ fontWeight: "bold" }}> {name.first} {name.last} ({dob})</span> 
+                         <span style={{ fontWeight: "bold" }}>  <a href="#">{email}</a> | <a href="https://www.linkedin.com/sample"> LinkedIn</a> </span>
+                         <span style={{ fontWeight: "bold" }}> {bio}</span>
                      </Card.Text>
                  </Card.Body>
              </Card>
                  
-                  
-                 
-
-                 
-
              ))}
-             
-             
-            
-            
-             
             </Container>
             
         );
