@@ -5,7 +5,9 @@ import { Component } from "react";
 import axios from 'axios';
 
 class AddCourse extends Component {
+
   state = {
+    isEditMode: false,
     instructors: [],
     newCourse: {
       title: '',
@@ -19,8 +21,8 @@ class AddCourse extends Component {
         end_date: ''
       },
       price: {
-        normal: null,
-        early_bird: null
+        normal: '',
+        early_bird: ''
       }
     },
     fieldErrors: {
@@ -36,6 +38,14 @@ class AddCourse extends Component {
   };
 
   componentDidMount() {
+    const isEditMode = this.props.isEditMode ? true : false
+
+    this.setState({ isEditMode })
+
+    if (isEditMode) {
+      this.setState({ newCourse: this.props.newCourse });
+    }
+
     axios.get(`http://localhost:3001/instructors/`)
       .then(res => {
         console.log(res.data);
@@ -80,7 +90,7 @@ class AddCourse extends Component {
       // console.log( this.state.newCourse.instructors)
 
     } else {
-      
+
       newCourse[id] = value;
       this.setState({ newCourse });
     }
@@ -158,7 +168,9 @@ class AddCourse extends Component {
     const newCourse = this.state.newCourse;
     return (
       <Container fluid>
-        <h3 style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
+        { !this.state.isEditMode &&
+          <h3 style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
+        }
         <Form>
           {
             [
@@ -203,8 +215,8 @@ class AddCourse extends Component {
               { heading: null, label: 'Course Description', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Description', errorText: 'Description is required', validationField: this.state.fieldErrors.description },
               { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.startDate },
               { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.endDate },
-              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.earlyBirdPrice },
-              { heading: null, label: 'Normal', field: 'normal', state: newCourse.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.normalPrice }
+              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.price.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.earlyBirdPrice },
+              { heading: null, label: 'Normal', field: 'normal', state: newCourse.price.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.normalPrice }
 
             ].map(({ heading, label, field, state, type, placeholder, errorText, validationField }) => (
               <React.Fragment key={field}>
@@ -212,7 +224,7 @@ class AddCourse extends Component {
                 <FormGroup row >
                   <Label for={field} sm={2}>{label}</Label>
                   <Col sm={10}>
-                    <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} invalid={validationField} />
+                    <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} invalid={validationField} rows="5" />
                     <FormFeedback> {errorText} </FormFeedback>
                   </Col>
                 </FormGroup>
