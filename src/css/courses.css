@@ -13,3 +13,10 @@
     flex-basis: calc(30% - 40px);
 }
 
+.imgs{
+    max-width: 980px;
+    width: 100%;
+    height: 403.2px;
+    
+}
+

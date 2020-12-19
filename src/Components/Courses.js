@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import "../css/courses.css"
 import { Card, Row, Col } from "react-bootstrap";
-import { Button, Container } from 'reactstrap';
+import { Button, Container, UncontrolledTooltip } from 'reactstrap';
+import { BsCheck, BsX } from "react-icons/bs";
+import { Link } from 'react-router-dom';
+
 
 // import {
 //   Card, CardText, CardBody, CardLink,
@@ -19,6 +22,19 @@ const Courses = () => {
             });
     }, []);
 
+    const convertDate = function (dateString) {
+        return dateString.split("-").reverse().join("-");
+    }
+
+    const generateTooltipId = function (id) {
+        return "tooltipId_" + id;
+    }
+    const generateCourseLink = function (id) {
+        return `course/${id}`
+    }
+
+    
+
     return (
 
         <div>
@@ -28,17 +44,19 @@ const Courses = () => {
                 <Container fluid>
                     <Col xs="12">
                         <Row>
-                            {courses.length && courses.map(({ id, title, imagePath, price, duration, dates }) => (
+                            {courses.slice(-5).map(({ id, title, imagePath, price, duration, open, dates }) => (
                                 <Card style={{ width: '20rem' }} key={id} className="box">
                                     <Card.Title>{title}</Card.Title>
+                                    <span id={generateTooltipId(id)}></span>
+                                    <UncontrolledTooltip target={generateTooltipId(id)}></UncontrolledTooltip>
                                     <Card.Img variant="top" src={imagePath} />
                                     <Card.Body>
                                         <Card.Text>
-                                            <span style={{ fontWeight: "bold" }}> Price:  {price.normal} / Bookable:  </span>
-                                            <span style={{ fontWeight: "bold" }}> Duration: {duration} </span>
-                                            <span style={{ fontWeight: "bold" }}> Dates: {dates.start_date} - {dates.end_date} </span>
+                                            <span style={{ fontWeight: "bold" }}> Price:  {price.normal} | Bookable: {open ? <BsCheck    /> :  <BsX    />   }</span>
+                                            <span style={{ fontWeight: "bold" }}> Duration: {duration}  </span>
+                                            <span style={{ fontWeight: "bold" }}> Dates: {convertDate(dates.start_date)} - {convertDate(dates.end_date)} </span>
                                         </Card.Text>
-                                        <Button style={{ float: 'right' }} color="primary">View</Button>
+                                        <Button style={{ float: 'right' }} color="primary" tag={Link} to={generateCourseLink(id)} >View</Button>
                                     </Card.Body>
                                 </Card>
                             ))}
