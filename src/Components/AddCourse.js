@@ -55,11 +55,14 @@ class AddCourse extends Component {
 
   onInputChange = ({ target }) => {
     const { id, value, checked } = target;
-    let { newCourse } = this.state;
-
     console.log(id, value);
 
-    // this.state.use.fieldErrors[id] = false;
+    let newCourse = this.state.newCourse;
+
+    // Reset errors on input change
+    let fieldErrors = this.state.fieldErrors;
+    fieldErrors[id] = false;
+    this.setState({ fieldErrors })
 
     if (id === 'start_date' || id === 'end_date') {
       newCourse.dates[id] = value;
@@ -80,11 +83,14 @@ class AddCourse extends Component {
       // console.log(instructorId);
 
       // Checking if instuctor id is already in the array
-      const index = this.state.newCourse.instructors.indexOf(instructorId);
-      if (checked === false && index > -1) {
-        this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
-      } else {
+      
+      if (checked) {
         this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
+      } else {
+        const index = this.state.newCourse.instructors.indexOf(instructorId);
+        if (index > -1) {
+          this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
+        }
       }
 
       // console.log( this.state.newCourse.instructors)
@@ -102,13 +108,28 @@ class AddCourse extends Component {
 
     if (!errorsExist) {
 
-      axios.post(`http://localhost:3001/courses`, this.state.newCourse)
+      const newCourse = this.state.newCourse;
+      newCourse.price.normal = parseInt(newCourse.price.normal);
+      newCourse.price.early_bird = parseInt(newCourse.price.early_bird);
+
+
+      if (this.state.isEditMode) {
+        axios.put(`http://localhost:3001/courses/` + this.state.newCourse.id, newCourse)
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
+      } else {
+        axios.post(`http://localhost:3001/courses`, newCourse)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
 
   }
@@ -190,7 +211,7 @@ class AddCourse extends Component {
           }
 
           <FormGroup check>
-            <Input type="checkbox" id="open" onChange={this.onInputChange} />
+            <Input type="checkbox" id="open" checked={newCourse.open} onChange={this.onInputChange} />
             <Label for="open" check>Bookable</Label>
           </FormGroup>
 
@@ -202,7 +223,7 @@ class AddCourse extends Component {
             {
               this.state.instructors.map(instructor => (
                 <Col key={instructor.id}>
-                  <Input type="checkbox" name={instructor.id} id="instructor" onChange={this.onInputChange} />
+                  <Input type="checkbox" name={instructor.id} checked={this.state.newCourse.instructors.indexOf(instructor.id) > -1} id="instructor" onChange={this.onInputChange} />
                   <Label check>{instructor.name.first} {instructor.name.last}</Label>
                 </Col>
               ))
