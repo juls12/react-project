@@ -47,13 +47,13 @@ const Courses = () => {
                             {courses.slice(-5).map(({ id, title, imagePath, price, duration, open, dates }) => (
                                 <Card style={{ width: '20rem' }} key={id} className="box">
                                     <Card.Title>{title}</Card.Title>
-                                    <p id={generateTooltipId(id)}></p>
+                                    <span id={generateTooltipId(id)}></span>
                                     <UncontrolledTooltip target={generateTooltipId(id)}></UncontrolledTooltip>
                                     <Card.Img variant="top" src={imagePath} />
                                     <Card.Body>
                                         <Card.Text>
                                             <span style={{ fontWeight: "bold" }}> Price:  {price.normal} | Bookable: {open ? <BsCheck    /> :  <BsX    />   }</span>
-                                            <span style={{ fontWeight: "bold" }}> <p>Duration: {duration} </p> </span>
+                                            <span style={{ fontWeight: "bold" }}> Duration: {duration}  </span>
                                             <span style={{ fontWeight: "bold" }}> Dates: {convertDate(dates.start_date)} - {convertDate(dates.end_date)} </span>
                                         </Card.Text>
                                         <Button style={{ float: 'right' }} color="primary" tag={Link} to={generateCourseLink(id)} >View</Button>
