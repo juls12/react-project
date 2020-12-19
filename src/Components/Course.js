@@ -74,7 +74,7 @@ export default class Course extends React.Component {
                 <Card>
                     <CardTitle><h1>{this.state.course.title}</h1></CardTitle>
                     <CardBody>
-                        <CardImg src={this.state.course.imagePath} alt="Card image cap"/>
+                        <CardImg className="imgs1" src={this.state.course.imagePath} alt="Card image cap"/>
                         <CardText>
                             <span style={{ fontWeight: "bold" }}>Price: {this.state.course.price?.normal}‎€</span>
                             <br /> <br/> 
