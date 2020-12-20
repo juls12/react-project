@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/index.css';
+import { ReactSVG } from 'react-svg';
 import {
   Collapse,
   Navbar,
@@ -18,7 +19,7 @@ const MyNav = (props) => {
   return (
     <div>
       <Navbar color="dark" light expand="md">
-        <Link to="/">Code.Hub Dashboard</Link>
+        <Link to="/"><ReactSVG className="svg" src="codehub.svg" /> </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="nav-style" navbar>
