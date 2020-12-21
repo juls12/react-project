@@ -39,6 +39,7 @@ text-align: right;
 
 .navbar a:hover {
   color: #f15b40;
+  text-decoration: none;
   }
 
 .jumbo-style {

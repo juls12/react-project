@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/index.css';
 import { ReactSVG } from 'react-svg';
+import { BsCheck, BsX, BsPlusCircle } from "react-icons/bs";
 import {
   Collapse,
   Navbar,
@@ -27,7 +28,7 @@ const MyNav = (props) => {
               <Link to="/courses">Courses</Link>
             </NavItem>
             <NavItem>
-              <Link to="/addcourse">Add Courses</Link>
+              <Link to="/addcourse"> <BsPlusCircle/> Add Courses</Link>
             </NavItem>
           </Nav>
         </Collapse>

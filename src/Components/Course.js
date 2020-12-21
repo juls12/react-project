@@ -103,19 +103,20 @@ export default class Course extends React.Component {
         return (
             <Container fluid>
                 <Card>
-                    <CardTitle><h1>{this.state.course.title}</h1></CardTitle>
+                    <CardTitle className="text-center"><h1>{this.state.course.title}</h1></CardTitle>
                     <CardBody>
                         <CardImg className="imgs1" src={this.state.course.imagePath} alt="Card image cap" />
                         <CardText>
                             <span style={{ fontWeight: "bold" }}>Price: {this.state.course.price?.normal}‎€</span>
-                            <br /> <br />
+                            <br /> 
                             <span style={{ fontWeight: "bold" }}> Bookable: {this.state.course.open ? <BsCheck /> : <BsX />}</span>
-                            <br /> <br />
+                            <br /> 
                             <span style={{ fontWeight: "bold" }}> Duration: {this.state.course.duration}</span>
-                            <br /> <br />
+                            <br /> 
                             <span style={{ fontWeight: "bold" }}> Dates: {convertDate(this.state.course.dates?.start_date)} - {convertDate(this.state.course.dates?.end_date)} </span>
-                            <br /> <br />
+                            <br /> 
                             <span style={{ fontWeight: "bold" }} dangerouslySetInnerHTML={{ __html: this.state.course.description }}></span>
+                            <br/>
                             <Button color="primary" onClick={this.toggleModalEdit.bind(this)}>Edit</Button>
 
                             <Modal isOpen={this.state.modalIsOpenEdit} >

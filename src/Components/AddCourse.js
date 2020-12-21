@@ -84,7 +84,7 @@ class AddCourse extends Component {
 
       // Checking if instuctor id is already in the array
       const index = this.state.newCourse.instructors.indexOf(instructorId);
-      if (checked && index == -1) {
+      if (checked && index === -1) {
         this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
       } else {
         this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
@@ -187,9 +187,9 @@ class AddCourse extends Component {
     return (
       <Container fluid>
         { !this.state.isEditMode &&
-          <h3 style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
+          <h3 className="text-center text-focus-in" style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
         }
-        <Form>
+        <Form >
           {
             [
               { label: 'Title', field: 'title', state: newCourse.title, type: 'text', placeholder: 'Enter Title', errorText: 'Title is required', validationField: this.state.fieldErrors.title },

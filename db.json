@@ -36,7 +36,9 @@
       },
       "duration": "2 days",
       "open": true,
-      "instructors": ["01"],
+      "instructors": [
+        "01"
+      ],
       "description": "<p>This <strong>innovative Scrum class</strong> won’t be like any other you’ve heard of, with an unconventional focus on the deeply human foundations at work in teams building stuff together.</p><p>This two-day seminar is designed to give aspiring and beginning ScrumMasters and team members the foundations of Scrum and Agile practice. Chock full of exercises, the seminar creates lasting memories and learnings you can carry through into your team so you can avoid common Agile pitfalls. The seminar is designed and taught by <strong>Jim Coplien</strong>, <strong>author of Organizational Patterns and Lean/Agile Process and Architecture Coach</strong>.</p>"
     },
     {
@@ -53,7 +55,10 @@
       },
       "duration": "4 Fridays and 4 Saturdays",
       "open": true,
-      "instructors": ["01", "02"],
+      "instructors": [
+        "01",
+        "02"
+      ],
       "description": "<p>Do you want to <strong>design products based on opinions or based on evidence</strong>?</p><p>In this course you will learn how <strong>UX research</strong> builds products that users really need, can and want to use!</p>"
     },
     {
@@ -70,7 +75,9 @@
       },
       "duration": "2 Wednesdays and 3 Saturdays",
       "open": true,
-      "instructors": ["02"],
+      "instructors": [
+        "02"
+      ],
       "description": "<p>This code.learn program&nbsp;covers introductory and advanced <strong>Angular</strong> topics through extensive hands-on sessions and guidance from senior developers.</p>"
     },
     {
@@ -87,28 +94,11 @@
       },
       "duration": "2 Fridays and 4 Saturdays",
       "open": true,
-      "instructors": ["01"],
+      "instructors": [
+        "01"
+      ],
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
     },
-    
-    {
-      "id": "05",
-      "title": "Java",
-      "imagePath": "/java.png",
-      "price": {
-        "normal": 1100,
-        "early_bird": 800
-      },
-      "dates": {
-        "start_date": "2019-09-27",
-        "end_date": "2019-09-28"
-      },
-      "duration": "2 days",
-      "open": false,
-      "instructors": ["01"],
-      "description": "<p>Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.</p>"
-    },
-
     {
       "id": "06",
       "title": "Python",
@@ -123,12 +113,109 @@
       },
       "duration": "2 days",
       "open": false,
-      "instructors": ["01"],
+      "instructors": [
+        "01"
+      ],
       "description": "<p>Python is an interpreted, high-level and general-purpose programming language. Python's design philosophy emphasizes code readability with its notable use of significant whitespace.</p>"
+    },
+    {
+      "title": "Software Quality Assurance",
+      "duration": "2 weeks",
+      "imagePath": "/qa.jpg",
+      "open": true,
+      "instructors": [
+        "02"
+      ],
+      "description": "Express your interest and secure your position to this unique from-Theory-to-Practice training program:\n\nMentality of Testing – Testers/developers perspective\nTesting “Language” & documentation\nFrom specs to test cases/reports (Analysis/Specifications -> Scenarios -> Test Case -> Test suite/Data/Reference Data)\nSelenium hands-on training",
+      "dates": {
+        "start_date": "2020-12-16",
+        "end_date": "2020-12-30"
+      },
+      "price": {
+        "normal": 400,
+        "early_bird": 350
+      },
+      "id": "m0S_ZpZ"
+    },
+    {
+      "title": "DevOps Engineering",
+      "duration": "3 weeks",
+      "imagePath": "/devops.jpg",
+      "open": true,
+      "instructors": [
+        "01",
+        "02"
+      ],
+      "description": "Participants will have a unique hands-on experience by using  cutting edge DevOps technologies and platforms in the fields of IT Infrastructure & Configuration Management, Continuous Integration, Continuous Deployment, Continuous Delivery and Continuous Monitoring.",
+      "dates": {
+        "start_date": "2021-01-19",
+        "end_date": "2020-12-31"
+      },
+      "price": {
+        "normal": 500,
+        "early_bird": 450
+      },
+      "id": "zHjKvy1"
+    },
+    {
+      "title": "Scrum Patterns",
+      "duration": "1 day",
+      "imagePath": "/Scrum.png",
+      "open": false,
+      "instructors": [
+        "01",
+        "02"
+      ],
+      "description": "The program is designed and taught by Jim Coplien, author of Organizational Patterns and Lean/Agile Process and Architecture Coach, powered by Gertrud & Cope, organized by Code.Hub and supported by Agile Greece.",
+      "dates": {
+        "start_date": "2021-03-24",
+        "end_date": "2021-03-31"
+      },
+      "price": {
+        "normal": 350,
+        "early_bird": 300
+      },
+      "id": "lcaltpG"
+    },
+    {
+      "title": "System Admin ",
+      "duration": "2 weeks",
+      "imagePath": "/sysadmin.jpg",
+      "open": true,
+      "instructors": [
+        "01"
+      ],
+      "description": "Express your interest and secure your position to this unique from-Theory-to-Practice training program:\n\nCommand-line concepts and enterprise-level tools\nBasic and advanced RedHat 7 / CentOS 7 linux administration tasks\nHands-on training with guided exercises and production case scenarios",
+      "dates": {
+        "start_date": "2020-12-29",
+        "end_date": "2021-01-14"
+      },
+      "price": {
+        "normal": 300,
+        "early_bird": 200
+      },
+      "id": "X37qQZf"
+    },
+    {
+      "title": "Vue.js",
+      "duration": "1 week",
+      "imagePath": "/vue.js.jpg",
+      "open": true,
+      "instructors": [
+        "01"
+      ],
+      "description": "This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.",
+      "dates": {
+        "start_date": "2021-01-01",
+        "end_date": "2021-01-08"
+      },
+      "price": {
+        "normal": 350,
+        "early_bird": 500
+      },
+      "id": "ZbHl3fK"
     }
-
   ],
-
   "instructors": [
     {
       "id": "01",
@@ -140,7 +227,10 @@
       "email": "tsevdosjohn@gmail.com",
       "dob": "1982-02-26",
       "bio": "front-end developer from Athens, Greece",
-      "hobbies": ["football", "movies"],
+      "hobbies": [
+        "football",
+        "movies"
+      ],
       "linkedin": "https://www.linkedin.com/sample"
     },
     {
@@ -154,7 +244,9 @@
       "email": "inikolakopoulos@codehub.gr",
       "dob": "1977-05-19",
       "bio": "Co-Founder Code.Hub",
-      "hobbies": ["movies"],
+      "hobbies": [
+        "movies"
+      ],
       "linkedin": "https://www.linkedin.com/sample"
     }
   ]

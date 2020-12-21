@@ -38,13 +38,13 @@ const Courses = () => {
     return (
 
         <div>
-            <h1>All Courses </h1>
+            <h1 className="text-center text-focus-in">All Courses </h1>
 
             <div className="cards">
                 <Container fluid>
                     <Col xs="12">
                         <Row>
-                            {courses.slice(-5).map(({ id, title, imagePath, price, duration, open, dates }) => (
+                            {courses.map(({ id, title, imagePath, price, duration, open, dates }) => (
                                 <Card style={{ width: '20rem' }} key={id} className="box">
                                     <Card.Title>{title}</Card.Title>
                                     <span id={generateTooltipId(id)}></span>
@@ -53,7 +53,9 @@ const Courses = () => {
                                     <Card.Body>
                                         <Card.Text>
                                             <span style={{ fontWeight: "bold" }}> Price:  {price.normal} | Bookable: {open ? <BsCheck    /> :  <BsX    />   }</span>
+                                           <br/>
                                             <span style={{ fontWeight: "bold" }}> Duration: {duration}  </span>
+                                            <br/>
                                             <span style={{ fontWeight: "bold" }}> Dates: {convertDate(dates.start_date)} - {convertDate(dates.end_date)} </span>
                                         </Card.Text>
                                         <Button style={{ float: 'right' }} color="primary" tag={Link} to={generateCourseLink(id)} >View</Button>
