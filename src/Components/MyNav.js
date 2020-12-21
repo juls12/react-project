@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/index.css';
 import { ReactSVG } from 'react-svg';
-import { BsCheck, BsX, BsPlusCircle } from "react-icons/bs";
+import { BsPlusCircle } from "react-icons/bs";
 import {
   Collapse,
   Navbar,
