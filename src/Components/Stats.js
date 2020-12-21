@@ -1,36 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Row, Col, CardText, Badge, Container } from 'reactstrap';
 
-export default class Stats extends React.Component {
-    state = {
-        stats: []
+const Stats = (props) => {
 
-    };
+    const [stats, setStats] = useState([]);
 
-    // Server runs on port 3001
+    useEffect(() => {
+        async function fetchData() {
+            // You can await here
+            const result = await axios(`http://localhost:3001/stats`);
+            setStats(result.data);
+        }
+        fetchData();
+    }, []);
 
-    componentDidMount() {
-        axios.get(`http://localhost:3001/stats`)
-            .then(res => {
-                this.setState({ stats: res.data });
-            });
-    }
-    render() {
-        return (
-            <Container fluid>
-                <Col md="12">
-                    <Row className="stats-row">
-                        {this.state.stats.map(stat =>
-                            <Col key={stat.id}>
-                                <Card body className="stats-body" >
-                                    <CardText className="stats-txt">{stat.title}  <Badge color="dark" pill> {stat.amount} </Badge></CardText>
-                                </Card>
-                            </Col>
-                        )}
-                    </Row>
-                </Col>
-            </Container>
-        );
-    }
+    return (
+        <Container fluid>
+            <Col md="12">
+                <Row className="stats-row">
+                    {stats.map(stat =>
+                        <Col key={stat.id}>
+                            <Card body className="stats-body" >
+                                <CardText className="stats-txt">{stat.title}  <Badge color="dark" pill> {stat.amount} </Badge></CardText>
+                            </Card>
+                        </Col>
+                    )}
+                </Row>
+            </Col>
+        </Container>
+    );
 }
+
+export default Stats;

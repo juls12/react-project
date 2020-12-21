@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import '../css/index.css';
 import { Col, Button, Form, FormGroup, Label, Input, Container, FormFeedback } from 'reactstrap';
-import { Component } from "react";
 import axios from 'axios';
 
-class AddCourse extends Component {
+const AddCourse = (props) => {
 
-  state = {
-    isEditMode: false,
-    instructors: [],
-    newCourse: {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [instructors, setInstructors] = useState([]);
+  const [newCourse, setNewCourse] = useState(
+    {
       title: '',
       duration: '',
       imagePath: '',
@@ -24,92 +23,96 @@ class AddCourse extends Component {
         normal: '',
         early_bird: ''
       }
-    },
-    fieldErrors: {
+    }
+  );
+
+  const [fieldErrors, setFieldErrors] = useState(
+    {
       title: false,
       duration: false,
       imagePath: false,
       description: false,
-      startDate: false,
-      endDate: false,
-      earlyBirdPrice: false,
-      normalPrice: false
+      start_date: false,
+      end_date: false,
+      early_bird: false,
+      normal: false
     }
-  };
+  );
 
-  componentDidMount() {
-    const isEditMode = this.props.isEditMode ? true : false
+  useEffect(() => {
+    const isEditMode = props.isEditMode ? true : false
 
-    this.setState({ isEditMode })
+    setIsEditMode(isEditMode);
 
     if (isEditMode) {
-      this.setState({ newCourse: this.props.newCourse });
+      setNewCourse(props.newCourse);
     }
 
     axios.get(`http://localhost:3001/instructors/`)
       .then(res => {
         console.log(res.data);
-        this.setState({ instructors: res.data });
+        setInstructors(res.data)
       })
-  }
+  }, [props.isEditMode, props.newCourse]);
 
-  onInputChange = ({ target }) => {
+  const onInputChange = ({ target }) => {
     const { id, value, checked } = target;
     console.log(id, value);
 
-    let newCourse = this.state.newCourse;
+    let course = newCourse;
 
     // Reset errors on input change
-    let fieldErrors = this.state.fieldErrors;
-    fieldErrors[id] = false;
-    this.setState({ fieldErrors })
+    let errors = fieldErrors;
+    errors[id] = false;
+    setFieldErrors({ ...errors });
 
     if (id === 'start_date' || id === 'end_date') {
-      newCourse.dates[id] = value;
-      this.setState({ newCourse });
+      course.dates[id] = value;
+      setNewCourse({ ...course });
 
     } else if (id === 'normal' || id === 'early_bird') {
-      newCourse.price[id] = value;
-      this.setState({ newCourse });
+      course.price[id] = value;
+      setNewCourse({ ...course });
 
     } else if (id === 'open') {
-      // console.log(checked);
+      console.log(checked);
 
-      newCourse[id] = checked;
-      this.setState({ newCourse });
+      course[id] = checked;
+      setNewCourse({ ...course });
 
     } else if (id === 'instructor') {
       const instructorId = target.name;
-      // console.log(instructorId);
+      console.log("instructorId: ", instructorId);
 
       // Checking if instuctor id is already in the array
-      const index = this.state.newCourse.instructors.indexOf(instructorId);
+      const index = newCourse.instructors.indexOf(instructorId);
       if (checked && index === -1) {
-        this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
+        // course.instructors.push(instructorId); // Adding instructor id to array
+        course.instructors.push(instructorId);
       } else {
-        this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
+        course.instructors.splice(index); // Removing instructor id from array 
       }
 
-      // console.log( this.state.newCourse.instructors)
+      setNewCourse({ ...course });
 
     } else {
-      newCourse[id] = value;
-      this.setState({ newCourse });
+      course[id] = value;
+      setNewCourse({ ...course })
     }
   };
 
-  sumbitForm = function () {
+  const sumbitForm = function () {
+    console.log('submitForm');
 
-    const errorsExist = this.validateInputs();
+    const errorsExist = validateInputs();
 
     if (!errorsExist) {
 
-      const newCourse = this.state.newCourse;
       newCourse.price.normal = parseInt(newCourse.price.normal);
       newCourse.price.early_bird = parseInt(newCourse.price.early_bird);
 
-      if (this.state.isEditMode) {
-        axios.put(`http://localhost:3001/courses/` + this.state.newCourse.id, newCourse)
+      if (isEditMode) {
+        axios.put(`http://localhost:3001/courses/` + newCourse.id, newCourse)
           .then(function (response) {
             console.log(response);
           })
@@ -122,7 +125,7 @@ class AddCourse extends Component {
             console.log(response);
           })
           .then(res => {
-            this.props.history.push('/courses');
+            props.history.push('/courses');
           })
           .catch(function (error) {
             console.log(error);
@@ -132,134 +135,133 @@ class AddCourse extends Component {
 
   }
 
-  validateInputs = function () {
+  const validateInputs = function () {
 
     let errorExists = false;
 
-    let { fieldErrors } = this.state;
-
-    if (!this.state.newCourse.title) {
+    if (!newCourse.title) {
       fieldErrors.title = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.duration) {
+    if (!newCourse.duration) {
       fieldErrors.duration = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.imagePath) {
+    if (!newCourse.imagePath) {
       fieldErrors.imagePath = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.description) {
+    if (!newCourse.description) {
       fieldErrors.description = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.dates.start_date) {
-      fieldErrors.startDate = true;
+    if (!newCourse.dates.start_date) {
+      fieldErrors.start_date = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.dates.end_date) {
-      fieldErrors.endDate = true;
+    if (!newCourse.dates.end_date) {
+      fieldErrors.end_date = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.price.early_bird) {
-      fieldErrors.earlyBirdPrice = true;
+    if (!newCourse.price.early_bird) {
+      fieldErrors.early_bird = true;
       errorExists = true;
     }
 
-    if (!this.state.newCourse.price.normal) {
-      fieldErrors.normalPrice = true;
+    if (!newCourse.price.normal) {
+      fieldErrors.normal = true;
       errorExists = true;
     }
 
-    this.setState({ fieldErrors });
+    setFieldErrors({ ...fieldErrors });
 
     return errorExists;
   }
 
-  render() {
-    const newCourse = this.state.newCourse;
-    return (
-      <Container fluid>
-        { !this.state.isEditMode &&
-          <h3 className="text-center text-focus-in" style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
-        }
-        <Form>
-          {
-            [
-              { label: 'Title', field: 'title', state: newCourse.title, type: 'text', placeholder: 'Enter Title', errorText: 'Title is required', validationField: this.state.fieldErrors.title },
-              { label: 'Duration', field: 'duration', state: newCourse.duration, type: 'text', placeholder: 'Enter Duration', errorText: 'Duration is required', validationField: this.state.fieldErrors.duration },
-              { label: 'Image Path', field: 'imagePath', state: newCourse.imagePath, type: 'text', placeholder: '/imagepath.jpg', errorText: 'ImagePath is required', validationField: this.state.fieldErrors.imagePath },
+  // render() {
+  // const newCourse = this.state.newCourse;
+  return (
+    <Container fluid>
+      { !isEditMode &&
+        <h3 className="text-center text-focus-in" style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
+      }
+      <Form>
+        {
+          [
+            { label: 'Title', field: 'title', state: newCourse.title, type: 'text', placeholder: 'Enter Title', errorText: 'Title is required', validationField: fieldErrors.title },
+            { label: 'Duration', field: 'duration', state: newCourse.duration, type: 'text', placeholder: 'Enter Duration', errorText: 'Duration is required', validationField: fieldErrors.duration },
+            { label: 'Image Path', field: 'imagePath', state: newCourse.imagePath, type: 'text', placeholder: '/imagepath.jpg', errorText: 'ImagePath is required', validationField: fieldErrors.imagePath },
 
-            ].map(({ label, field, state, type, placeholder, errorText, validationField }) => (
-              <FormGroup row key={field}>
+          ].map(({ label, field, state, type, placeholder, errorText, validationField }) => (
+            <FormGroup row key={field}>
+              <Label for={field} sm={2}>{label}</Label>
+              <Col sm={10}>
+                <Input type={type} id={field} value={state} placeholder={placeholder} onChange={onInputChange} invalid={validationField} />
+                <FormFeedback> {errorText} </FormFeedback>
+              </Col>
+            </FormGroup>
+          ))
+        }
+
+        <FormGroup check>
+          <Input type="checkbox" id="open" checked={newCourse.open} onChange={onInputChange} />
+          <Label for="open" check>Bookable</Label>
+        </FormGroup>
+
+        <br />
+
+
+        <h5 style={{ marginBottom: '20px', marginTop: '20px' }}>Instructors</h5>
+        <FormGroup check>
+          {
+            instructors.map(instructor => (
+              <Col key={instructor.id}>
+                <Input type="checkbox" name={instructor.id} checked={newCourse.instructors.indexOf(instructor.id) > -1} id="instructor" onChange={onInputChange} />
+                <Label check>{instructor.name.first} {instructor.name.last}</Label>
+              </Col>
+            ))
+          }
+        </FormGroup>
+
+        <br />
+        {
+          [
+            { heading: null, label: 'Course Description', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Description', errorText: 'Description is required', validationField: fieldErrors.description },
+            { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: fieldErrors.start_date },
+            { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: fieldErrors.end_date },
+            { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.price.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: fieldErrors.early_bird },
+            { heading: null, label: 'Normal', field: 'normal', state: newCourse.price.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: fieldErrors.normal }
+
+          ].map(({ heading, label, field, state, type, placeholder, errorText, validationField }) => (
+            <React.Fragment key={field}>
+              <h5>{heading}</h5>
+              <FormGroup row >
                 <Label for={field} sm={2}>{label}</Label>
                 <Col sm={10}>
-                  <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} invalid={validationField} />
+                  <Input type={type} id={field} value={state} placeholder={placeholder} onChange={onInputChange} invalid={validationField} rows="5" />
                   <FormFeedback> {errorText} </FormFeedback>
                 </Col>
               </FormGroup>
-            ))
-          }
+            </React.Fragment>
+          ))
+        }
 
-          <FormGroup check>
-            <Input type="checkbox" id="open" checked={newCourse.open} onChange={this.onInputChange} />
-            <Label for="open" check>Bookable</Label>
-          </FormGroup>
-
-          <br />
-
-
-          <h5 style={{ marginBottom: '20px', marginTop: '20px' }}>Instructors</h5>
-          <FormGroup check>
-            {
-              this.state.instructors.map(instructor => (
-                <Col key={instructor.id}>
-                  <Input type="checkbox" name={instructor.id} checked={this.state.newCourse.instructors.indexOf(instructor.id) > -1} id="instructor" onChange={this.onInputChange} />
-                  <Label check>{instructor.name.first} {instructor.name.last}</Label>
-                </Col>
-              ))
-            }
-          </FormGroup>
-
-          <br />
-          {
-            [
-              { heading: null, label: 'Course Description', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Description', errorText: 'Description is required', validationField: this.state.fieldErrors.description },
-              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.startDate },
-              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.endDate },
-              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.price.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.earlyBirdPrice },
-              { heading: null, label: 'Normal', field: 'normal', state: newCourse.price.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.normalPrice }
-
-            ].map(({ heading, label, field, state, type, placeholder, errorText, validationField }) => (
-              <React.Fragment key={field}>
-                <h5>{heading}</h5>
-                <FormGroup row >
-                  <Label for={field} sm={2}>{label}</Label>
-                  <Col sm={10}>
-                    <Input type={type} id={field} value={state} placeholder={placeholder} onChange={this.onInputChange} invalid={validationField} rows="5" />
-                    <FormFeedback> {errorText} </FormFeedback>
-                  </Col>
-                </FormGroup>
-              </React.Fragment>
-            ))
-          }
-
-          <FormGroup row style={{ textAlign: "right" }}>
-            <Col sm={{ size: 10, offset: 2 }}>
-              <Button color="primary" onClick={() => this.sumbitForm()}>Submit</Button>
-            </Col>
-          </FormGroup>
-        </Form>
-      </Container>
-    );
-  }
+        <FormGroup row style={{ textAlign: "right" }}>
+          <Col sm={{ size: 10, offset: 2 }}>
+            <Button color="primary" onClick={() => sumbitForm()}>Submit</Button>
+          </Col>
+        </FormGroup>
+      </Form>
+    </Container>
+  );
 }
+// }
+
 
 export default AddCourse;
