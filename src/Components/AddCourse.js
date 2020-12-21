@@ -93,7 +93,6 @@ class AddCourse extends Component {
       // console.log( this.state.newCourse.instructors)
 
     } else {
-
       newCourse[id] = value;
       this.setState({ newCourse });
     }
@@ -109,7 +108,6 @@ class AddCourse extends Component {
       newCourse.price.normal = parseInt(newCourse.price.normal);
       newCourse.price.early_bird = parseInt(newCourse.price.early_bird);
 
-
       if (this.state.isEditMode) {
         axios.put(`http://localhost:3001/courses/` + this.state.newCourse.id, newCourse)
           .then(function (response) {
@@ -122,6 +120,9 @@ class AddCourse extends Component {
         axios.post(`http://localhost:3001/courses`, newCourse)
           .then(function (response) {
             console.log(response);
+          })
+          .then(res => {
+            this.props.history.push('/courses');
           })
           .catch(function (error) {
             console.log(error);
@@ -189,7 +190,7 @@ class AddCourse extends Component {
         { !this.state.isEditMode &&
           <h3 className="text-center text-focus-in" style={{ marginBottom: '20px', marginTop: '20px' }}>Add a New Course</h3>
         }
-        <Form >
+        <Form>
           {
             [
               { label: 'Title', field: 'title', state: newCourse.title, type: 'text', placeholder: 'Enter Title', errorText: 'Title is required', validationField: this.state.fieldErrors.title },
@@ -212,7 +213,7 @@ class AddCourse extends Component {
             <Label for="open" check>Bookable</Label>
           </FormGroup>
 
-          <br></br>
+          <br />
 
 
           <h5 style={{ marginBottom: '20px', marginTop: '20px' }}>Instructors</h5>
@@ -227,7 +228,7 @@ class AddCourse extends Component {
             }
           </FormGroup>
 
-          <br></br>
+          <br />
           {
             [
               { heading: null, label: 'Course Description', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Description', errorText: 'Description is required', validationField: this.state.fieldErrors.description },
