@@ -10,8 +10,8 @@ export default class Course extends React.Component {
     state = {
         course: {},
         instructors: [],
-        modalisOpenEdit: false,
-        modalisOpenDelete: false
+        modalIsOpenEdit: false,
+        modalIsOpenDelete: false
     };
 
     encodeQueryData(param, data) {
@@ -23,13 +23,17 @@ export default class Course extends React.Component {
 
     toggleModalEdit() {
         this.setState({
-            modalisOpenEdit: !this.state.modalisOpenEdit
+            modalIsOpenEdit: !this.state.modalIsOpenEdit
         });
+        if (this.state.modalIsOpenEdit) {
+            console.log('modal is closing');
+            this.getCourseData(this.state.course.id);
+        }
     }
 
     toggleModalDelete() {
         this.setState({
-            modalisOpenDelete: !this.state.modalisOpenDelete
+            modalIsOpenDelete: !this.state.modalIsOpenDelete
         });
     }
 
@@ -39,11 +43,10 @@ export default class Course extends React.Component {
         })
     }
 
-    // Server runs on port 3001
-    //Get Course id and the data for their instructors
-    componentDidMount() {
-        const { match: { params } } = this.props;
-        axios.get(`http://localhost:3001/courses/${params.id}`)
+    getCourseData(courseId) {
+        console.log('Get course data')
+        
+        axios.get(`http://localhost:3001/courses/${courseId}`)
             .then(res => {
                 console.log(res.data);
                 this.setState({ course: res.data });
@@ -57,8 +60,17 @@ export default class Course extends React.Component {
                             console.log(res.data);
                             this.setState({ instructors: res.data });
                         })
+                } else {
+                    this.setState({ instructors: [] });
                 }
             });
+    }
+
+    // Server runs on port 3001
+    //Get Course id and the data for their instructors
+    componentDidMount() {
+        const { match: { params } } = this.props;
+        this.getCourseData(params.id);
     }
 
     deleteCourse(e) {
@@ -93,7 +105,7 @@ export default class Course extends React.Component {
                 <Card>
                     <CardTitle><h1>{this.state.course.title}</h1></CardTitle>
                     <CardBody>
-                        <CardImg className="imgs1" src={this.state.course.imagePath} alt="Card image cap"/>
+                        <CardImg className="imgs1" src={this.state.course.imagePath} alt="Card image cap" />
                         <CardText>
                             <span style={{ fontWeight: "bold" }}>Price: {this.state.course.price?.normal}‎€</span>
                             <br /> <br />
@@ -106,14 +118,14 @@ export default class Course extends React.Component {
                             <span style={{ fontWeight: "bold" }} dangerouslySetInnerHTML={{ __html: this.state.course.description }}></span>
                             <Button color="primary" onClick={this.toggleModalEdit.bind(this)}>Edit</Button>
 
-                            <Modal isOpen={this.state.modalisOpenEdit} >
+                            <Modal isOpen={this.state.modalIsOpenEdit} >
                                 <ModalHeader toggle={this.toggleModalEdit.bind(this)}>Edit Course</ModalHeader>
                                 <ModalBody><AddCourse isEditMode={true} newCourse={this.state.course} /></ModalBody>
                             </Modal>
 
                             <Button color="danger" className="ml-3" onClick={this.toggleModalDelete.bind(this)}>Delete</Button>
                             <br />
-                            <Modal isOpen={this.state.modalisOpenDelete}>
+                            <Modal isOpen={this.state.modalIsOpenDelete}>
                                 <ModalHeader toggle={this.toggleModalDelete.bind(this)}>Delete Course</ModalHeader>
                                 <ModalBody>
                                     <h2>Are sure you want to delete this {this.state.course.title} course?</h2>

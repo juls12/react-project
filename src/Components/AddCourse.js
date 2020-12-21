@@ -83,14 +83,11 @@ class AddCourse extends Component {
       // console.log(instructorId);
 
       // Checking if instuctor id is already in the array
-      
-      if (checked) {
+      const index = this.state.newCourse.instructors.indexOf(instructorId);
+      if (checked && index == -1) {
         this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
       } else {
-        const index = this.state.newCourse.instructors.indexOf(instructorId);
-        if (index > -1) {
-          this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
-        }
+        this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
       }
 
       // console.log( this.state.newCourse.instructors)
@@ -115,12 +112,12 @@ class AddCourse extends Component {
 
       if (this.state.isEditMode) {
         axios.put(`http://localhost:3001/courses/` + this.state.newCourse.id, newCourse)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       } else {
         axios.post(`http://localhost:3001/courses`, newCourse)
           .then(function (response) {
