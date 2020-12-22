@@ -9,6 +9,9 @@ To run the app
 To run the script that runs the json server
 ### `npm run server`
 
+Checkout also branch: [functionalComp](https://github.com/juls12/react-project/tree/functionalComp)
+It includes aproach on functional components.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
