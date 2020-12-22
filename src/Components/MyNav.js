@@ -31,7 +31,7 @@ const MyNav = (props) => {
               <Link to="/addcourse"> <BsPlusCircle/> Add Courses</Link>
             </NavItem>
             <NavItem>
-              <Link to="/addinstructor">Add Instructors</Link>
+              <Link to="/addinstructor"> <BsPlusCircle/> Add Instructors</Link>
             </NavItem>
           </Nav>
         </Collapse>

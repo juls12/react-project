@@ -119,7 +119,7 @@ export default class Course extends React.Component {
                             <br/>
                             <Button color="primary" onClick={this.toggleModalEdit.bind(this)}>Edit</Button>
 
-                            <Modal isOpen={this.state.modalIsOpenEdit} >
+                            <Modal size="lg" isOpen={this.state.modalIsOpenEdit} >
                                 <ModalHeader toggle={this.toggleModalEdit.bind(this)}>Edit Course</ModalHeader>
                                 <ModalBody><AddCourse isEditMode={true} newCourse={this.state.course} /></ModalBody>
                             </Modal>
