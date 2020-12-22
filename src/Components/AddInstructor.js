@@ -43,7 +43,7 @@ class AddInstructor extends Component {
       }
 
     onInputChange = ({target}) => {
-        const { id, value, checked } = target;
+        const { id, value } = target;
         console.log(id, value);
 
         let newInstructor = this.state.newInstructor;
@@ -146,7 +146,6 @@ class AddInstructor extends Component {
                 }
                 <Form>
 
-                    
                     {
                         [
                             {heading: null, label: 'Gender', field: 'gender', state: newInstructor.gender, type: 'text', placeholder: 'Enter Gender' , errorText: 'Gender is required', validationField: this.state.fieldErrors.gender},
