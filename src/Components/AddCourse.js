@@ -30,10 +30,10 @@ class AddCourse extends Component {
       duration: false,
       imagePath: false,
       description: false,
-      startDate: false,
-      endDate: false,
-      earlyBirdPrice: false,
-      normalPrice: false
+      start_date: false,
+      end_date: false,
+      early_bird: false,
+      normal: false
     }
   };
 
@@ -83,10 +83,11 @@ class AddCourse extends Component {
       // console.log(instructorId);
 
       // Checking if instuctor id is already in the array
-      const index = this.state.newCourse.instructors.indexOf(instructorId);
-      if (checked && index === -1) {
+      
+      if (checked) {
         this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
       } else {
+        const index = this.state.newCourse.instructors.indexOf(instructorId);
         this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
       }
 
@@ -97,6 +98,56 @@ class AddCourse extends Component {
       this.setState({ newCourse });
     }
   };
+
+  validateInputs = function () {
+
+    let errorExists = false;
+
+    let { fieldErrors } = this.state;
+
+    if (!this.state.newCourse.title) {
+      fieldErrors.title = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.duration) {
+      fieldErrors.duration = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.imagePath) {
+      fieldErrors.imagePath = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.description) {
+      fieldErrors.description = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.dates.start_date) {
+      fieldErrors.start_date = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.dates.end_date) {
+      fieldErrors.end_date = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.price.early_bird) {
+      fieldErrors.early_bird = true;
+      errorExists = true;
+    }
+
+    if (!this.state.newCourse.price.normal) {
+      fieldErrors.normal = true;
+      errorExists = true;
+    }
+
+    this.setState({ fieldErrors });
+    return errorExists;
+  }
 
   sumbitForm = function () {
 
@@ -130,57 +181,6 @@ class AddCourse extends Component {
       }
     }
 
-  }
-
-  validateInputs = function () {
-
-    let errorExists = false;
-
-    let { fieldErrors } = this.state;
-
-    if (!this.state.newCourse.title) {
-      fieldErrors.title = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.duration) {
-      fieldErrors.duration = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.imagePath) {
-      fieldErrors.imagePath = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.description) {
-      fieldErrors.description = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.dates.start_date) {
-      fieldErrors.startDate = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.dates.end_date) {
-      fieldErrors.endDate = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.price.early_bird) {
-      fieldErrors.earlyBirdPrice = true;
-      errorExists = true;
-    }
-
-    if (!this.state.newCourse.price.normal) {
-      fieldErrors.normalPrice = true;
-      errorExists = true;
-    }
-
-    this.setState({ fieldErrors });
-
-    return errorExists;
   }
 
   render() {
@@ -220,7 +220,7 @@ class AddCourse extends Component {
           <FormGroup check>
             {
               this.state.instructors.map(instructor => (
-                <Col key={instructor.id}>
+                <Col key={instructor.id}>                             
                   <Input type="checkbox" name={instructor.id} checked={this.state.newCourse.instructors.indexOf(instructor.id) > -1} id="instructor" onChange={this.onInputChange} />
                   <Label check>{instructor.name.first} {instructor.name.last}</Label>
                 </Col>
@@ -232,10 +232,10 @@ class AddCourse extends Component {
           {
             [
               { heading: null, label: 'Course Description', field: 'description', state: newCourse.description, type: 'textarea', placeholder: 'Enter Description', errorText: 'Description is required', validationField: this.state.fieldErrors.description },
-              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.startDate },
-              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.endDate },
-              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.price.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.earlyBirdPrice },
-              { heading: null, label: 'Normal', field: 'normal', state: newCourse.price.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.normalPrice }
+              { heading: 'Dates', label: 'Start Date', field: 'start_date', state: newCourse.dates.start_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.start_date },
+              { heading: null, label: 'End Date', field: 'end_date', state: newCourse.dates.end_date, type: 'date', placeholder: 'dd-mm-yyyy', errorText: 'Date is required', validationField: this.state.fieldErrors.end_date },
+              { heading: 'Price', label: 'Early Bird', field: 'early_bird', state: newCourse.price.early_bird, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.early_bird },
+              { heading: null, label: 'Normal', field: 'normal', state: newCourse.price.normal, type: 'number', placeholder: '0', errorText: 'Price is required', validationField: this.state.fieldErrors.normal }
 
             ].map(({ heading, label, field, state, type, placeholder, errorText, validationField }) => (
               <React.Fragment key={field}>

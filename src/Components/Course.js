@@ -69,8 +69,8 @@ export default class Course extends React.Component {
     // Server runs on port 3001
     //Get Course id and the data for their instructors
     componentDidMount() {
-        const { match: { params } } = this.props;
-        this.getCourseData(params.id);
+        const courseId = this.props.match.params.id;
+        this.getCourseData(courseId);
     }
 
     deleteCourse(e) {
