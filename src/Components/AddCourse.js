@@ -80,18 +80,15 @@ class AddCourse extends Component {
 
     } else if (id === 'instructor') {
       const instructorId = target.name;
-      // console.log(instructorId);
 
       // Checking if instuctor id is already in the array
-      
       if (checked) {
-        this.state.newCourse.instructors.push(instructorId); // Adding instructor id to array
+        newCourse.instructors.push(instructorId); // Adding instructor id to array
       } else {
-        const index = this.state.newCourse.instructors.indexOf(instructorId);
-        this.state.newCourse.instructors.splice(index); // Removing instructor id from array 
+        const index = newCourse.instructors.indexOf(instructorId);
+        newCourse.instructors.splice(index, 1); // Removing instructor id from array 
       }
-
-      // console.log( this.state.newCourse.instructors)
+      this.setState({ newCourse });
 
     } else {
       newCourse[id] = value;
@@ -220,7 +217,7 @@ class AddCourse extends Component {
           <FormGroup check>
             {
               this.state.instructors.map(instructor => (
-                <Col key={instructor.id}>                             
+                <Col key={instructor.id}>
                   <Input type="checkbox" name={instructor.id} checked={this.state.newCourse.instructors.indexOf(instructor.id) > -1} id="instructor" onChange={this.onInputChange} />
                   <Label check>{instructor.name.first} {instructor.name.last}</Label>
                 </Col>
