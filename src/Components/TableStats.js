@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default class TableStats extends React.Component {
     state = {
-        tablestats: [],
-       
-
+        tablestats: []
     };
 
     // Server runs on port 3001

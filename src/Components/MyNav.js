@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../css/index.css';
+import { ReactSVG } from 'react-svg';
+import { BsPlusCircle } from "react-icons/bs";
 import {
   Collapse,
   Navbar,
@@ -18,7 +20,7 @@ const MyNav = (props) => {
   return (
     <div>
       <Navbar color="dark" light expand="md">
-        <Link to="/">Code.Hub Dashboard</Link>
+        <Link to="/"><ReactSVG className="svg" src="codehub.svg" /> </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="nav-style" navbar>
@@ -26,7 +28,7 @@ const MyNav = (props) => {
               <Link to="/courses">Courses</Link>
             </NavItem>
             <NavItem>
-              <Link to="/addcourse">Add Courses</Link>
+              <Link to="/addcourse"> <BsPlusCircle/> Add Courses</Link>
             </NavItem>
             <NavItem>
               <Link to="/addinstructor">Add Instructors</Link>

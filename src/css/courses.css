@@ -22,7 +22,23 @@
 
 @media screen and (min-width: 1200px) {
     .imgs1 {
-      max-width: 70%;
+      max-width: 30%;
     }
   }
 
+  .searchbox {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  background:none;
+  background-color: #EEE;
+  border-radius: 8px;
+  color: black;
+transition: 0.4s ease-out;
+}
+
+.searchbox:focus{
+    box-shadow: 0px 0px 4px 3px rgba(160, 159, 159, 0.438) ;
+}
