@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Banner from "./Components/Banner";
 import Stats from './Components/Stats';
 import TableStats from './Components/TableStats';
+import AddInstructor from './Components/AddInstructor';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
      <Route path="/courses" component={Courses} />
      <Route path="/course/:id" component={Course} />
      <Route path="/addcourse" component={AddCourse} />
+     <Route path="/addinstructor" component={AddInstructor} />
      </Switch>
     </div>
     </Router>

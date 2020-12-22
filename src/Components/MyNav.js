@@ -30,6 +30,9 @@ const MyNav = (props) => {
             <NavItem>
               <Link to="/addcourse"> <BsPlusCircle/> Add Courses</Link>
             </NavItem>
+            <NavItem>
+              <Link to="/addinstructor">Add Instructors</Link>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
