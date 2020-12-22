@@ -85,12 +85,13 @@ const AddCourse = (props) => {
       console.log("instructorId: ", instructorId);
 
       // Checking if instuctor id is already in the array
-      const index = newCourse.instructors.indexOf(instructorId);
-      if (checked && index === -1) {
+      
+      if (checked) {
         // course.instructors.push(instructorId); // Adding instructor id to array
         course.instructors.push(instructorId);
       } else {
-        course.instructors.splice(index); // Removing instructor id from array 
+        const index = newCourse.instructors.indexOf(instructorId);
+        course.instructors.splice(index, 1); // Removing instructor id from array 
       }
 
       setNewCourse({ ...course });

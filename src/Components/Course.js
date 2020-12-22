@@ -119,7 +119,7 @@ const Course = (props) => {
                         <br />
                         <Button color="primary" onClick={toggleModalEdit.bind(this)}>Edit</Button>
 
-                        <Modal isOpen={modalIsOpenEdit} >
+                        <Modal isOpen={modalIsOpenEdit} size="lg">
                             <ModalHeader toggle={toggleModalEdit.bind(this)}>Edit Course</ModalHeader>
                             <ModalBody><AddCourse isEditMode={true} newCourse={course} /></ModalBody>
                         </Modal>
